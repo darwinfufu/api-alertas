@@ -10,13 +10,12 @@ class Alerta extends Model
 {
     protected $table = 'alertas';
     protected $primary_key = 'id';
-    const CREATED_AT = 'fecha_creado';
-    const UPDATED_AT = 'fecha_actualizado';
 
     //constantes para el estado de la alerta
     const alerta_atendida = 'atendida';
     const alerta_cancelada = 'cancelada';
     const alerta_enviada = 'enviada';
+    const alerta_no_enviada = 'no enviada';
     const alerta_espera = 'en espera';
     
     protected $fillable = [

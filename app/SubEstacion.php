@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubEstacion extends Model
 {
-    protected $table = 'subestaciones';
+    protected $table = 'sub_estaciones';
     protected $primary_key = 'id';
-    const CREATED_AT = 'fecha_creado';
-    const UPDATED_AT = 'fecha_actualizado';
 
     protected $fillable = [
         'num_subestacion', 
-        'ubicacion', 
+        'ubicacion',
+        'telefono', 
         'latitud',
         'longitud',
         'estacion_id',

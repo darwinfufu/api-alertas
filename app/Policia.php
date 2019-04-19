@@ -8,10 +8,6 @@ use App\SubEstacion;
 class Policia extends User
 {
 
-    protected $fillable = [
-        'sub_estacion_id',
-    ];
-
     /**
      * Policia puede enviar muchas Alertas.
      *

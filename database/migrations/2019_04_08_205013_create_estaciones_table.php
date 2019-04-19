@@ -15,7 +15,16 @@ class CreateEstacionesTable extends Migration
     {
         Schema::create('estaciones', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('num_estacion', 45);
+            $table->string('ubicacion', 255);
+            $table->string('telefono',15);
+            $table->string('latitud');
+            $table->string('longitud');
+            $table->integer('comisaria_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('comisaria_id')->references('id')->on('comisarias');
+
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRestableceContrasenaTable extends Migration
+class CreateRestableceContrasenasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRestableceContrasenaTable extends Migration
      */
     public function up()
     {
-        Schema::create('restablece_contrasena', function (Blueprint $table) {
+        Schema::create('restablece_contrasenas', function (Blueprint $table) {
             $table->string('correo')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -27,6 +27,6 @@ class CreateRestableceContrasenaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restablece_contrasena');
+        Schema::dropIfExists('restablece_contrasenas');
     }
 }

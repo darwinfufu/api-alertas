@@ -10,12 +10,11 @@ class Estacion extends Model
 {
     protected $table = 'estaciones';
     protected $primary_key = 'id';
-    const CREATED_AT = 'fecha_creado';
-    const UPDATED_AT = 'fecha_actualizado';
 
     protected $fillable = [
         'num_estacion', 
-        'ubicacion', 
+        'ubicacion',
+        'telefono', 
         'latitud',
         'longitud',
         'comisaria_id',

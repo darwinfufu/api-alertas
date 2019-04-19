@@ -2,18 +2,18 @@
 
 namespace App;
 
+use App\Estacion;
 use Illuminate\Database\Eloquent\Model;
 
 class Comisaria extends Model
 {
     protected $table = 'comisarias';
     protected $primary_key = 'id';
-    const CREATED_AT = 'fecha_creado';
-    const UPDATED_AT = 'fecha_actualizado';
 
     protected $fillable = [
         'num_comisaria', 
-        'ubicacion', 
+        'ubicacion',
+        'telefono',
         'latitud',
         'longitud',
     ];
@@ -26,7 +26,7 @@ class Comisaria extends Model
     public function estaciones()
     {
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = comisaria_id, localKey = id)
-        return $this->hasMany(Estacione::class, 'comisaria_id');
+        return $this->hasMany(Estacion::class, 'comisaria_id');
     }
 
 }

@@ -15,6 +15,11 @@ class CreateComisariasTable extends Migration
     {
         Schema::create('comisarias', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('num_comisaria',45);
+            $table->string('ubicacion', 255);
+            $table->string('telefono',15);
+            $table->string('latitud');
+            $table->string('longitud');
             $table->timestamps();
         });
     }
