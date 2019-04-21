@@ -19,9 +19,9 @@ class AlertasSeeder extends Seeder
             'descripcion'		=>	'robo de moto tipo pasola color verde',
             'latitud'			=>	'14.965311',
             'longitud'			=>	'-91.799722',
-            'telefono_usuario'	=>	User::all()->find('2')->id,
+            'telefono_usuario'	=>	User::all()->find('1')->telefono,
             'estado'			=>	Alerta::alerta_enviada,
-            'usuario_id'		=>	2
+            'usuario_id'		=>	1
         ]);
 
         //Alerta No. 2
@@ -29,7 +29,7 @@ class AlertasSeeder extends Seeder
             'descripcion'		=>	'robo de carro tipo pick up',
             'latitud'			=>	'14.969179',
             'longitud'			=>	'-91.792333',
-            'telefono_usuario'	=>	User::all()->find('2')->id,
+            'telefono_usuario'	=>	User::all()->find('2')->telefono,
             'estado'			=>	Alerta::alerta_espera,
             'usuario_id'		=>	2
         ]);

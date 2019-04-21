@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Persona;
 
 use App\Persona;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 
-class PersonaController extends Controller
+class PersonaController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class PersonaController extends Controller
     public function index()
     {
 		$personas = Persona::where('sub_estacion_id', null)->get();
-        return response()->json(['data' => $personas], 200);
+        return $this->showAll($personas);
     }
 
 
@@ -30,6 +29,6 @@ class PersonaController extends Controller
     public function show($id)
     {
         $persona = Persona::where('sub_estacion_id', null)->findOrFail($id);
-        return response()->json(['data' => $persona], 200);
+        return $this->showOne($persona);
     }
 }

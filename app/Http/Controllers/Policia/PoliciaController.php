@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Policia;
 
 use App\Policia;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 
-class PoliciaController extends Controller
+class PoliciaController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class PoliciaController extends Controller
     {
         $policias = Policia::has('subestacion')->get();
 
-        return response()->json(['data' => $policias], 200);
+        return $this->showAll($policias);
     }
 
     
@@ -32,7 +32,7 @@ class PoliciaController extends Controller
     {
         $policia = Policia::has('subestacion')->findOrFail($id);
 
-        return response()->json(['data' => $policia], 200);
+        return $this->showOne($policia);
     }
 
     

@@ -54,6 +54,35 @@ class User extends Authenticatable
         'token_verificacion',
     ];
 
+    //Mutadores y Accesores para el nombre y apellido del usuario y para el género
+    public function setAtrNombre($valor){
+        $this->attributes['nombre'] = strtolower($valor);
+    }
+
+    public function getAtrNombre($valor){
+        return ucwords($valor);
+    }
+
+    public function setAtrApellido($valor){
+        $this->attributes['apellido'] = strtolower($valor);
+    }
+
+    public function getAtrApellido($valor){
+        return ucwords($valor);
+    }
+
+    public function setAtrGenero($valor){
+        $this->attributes['genero'] = strtolower($valor);
+    }
+
+    public function getAtrGenero($valor){
+        return ucfirst($valor);
+    }
+
+    public function setAtrCorreo($valor){
+        $this->attributes['correo'] = strtolower($valor);
+    }
+
     public function esVerificado(){
         return $this->verificado == User::usuario_verificado;
     }

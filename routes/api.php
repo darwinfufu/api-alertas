@@ -11,12 +11,12 @@ Route::resource('alertas','Alerta\AlertaController', ['except' => ['create', 'ed
 /*
 	Comisarías
 */
-Route::resource('comisarias','Comisaria\ComisariaController', ['only' => ['index', 'show']]);
+Route::resource('comisarias','Comisaria\ComisariaController', ['except' => ['create', 'edit']]);
 
 /*
 	Estaciones de Policía
 */
-Route::resource('estaciones','Estacion\EstacionController', ['only' => ['index', 'show']]);
+Route::resource('estaciones','Estacion\EstacionController', ['except' => ['create', 'edit']]);
 
 /*
 	Personas Comunes
@@ -31,7 +31,7 @@ Route::resource('policias','Policia\PoliciaController', ['only' => ['index', 'sh
 /*
 	SubEstaciones de Policía
 */
-Route::resource('subestaciones','SubEstacion\SubEstacionController', ['only' => ['index', 'show']]);
+Route::resource('subestaciones','SubEstacion\SubEstacionController', ['except' => ['create', 'edit']]);
 
 
 /*

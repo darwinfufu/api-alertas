@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Usuario;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 
-class UsuarioController extends Controller
+class UsuarioController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = User::all();
-        return response()->json(['data' => $usuarios],200);
+        return $this->showAll($usuarios);
     }
 
 
@@ -33,6 +33,7 @@ class UsuarioController extends Controller
             'nombre'        =>  'required',
             'apellido'      =>  'required',
             'dpi'           =>  'required|unique:usuarios',
+            'telefono'      =>  'min:8',
             'correo'        =>  'required|email|unique:usuarios',
             'contrasena'    =>  'required|min:6|confirmed'
         ];
@@ -51,7 +52,7 @@ class UsuarioController extends Controller
         $usuario = User::create($campos);
 
         //Se realizó la operación con éxito, se retorna una respuesta de tipo 201
-        return response()->json(['data' => $usuario], 201);
+        return $this->showOne($usuario, 201);
 
     }
 
@@ -64,7 +65,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = User::findOrFail($id);
-        return response()->json(['data' => $usuario],200);
+        return $this->showOne($usuario);
     }
 
 
@@ -81,9 +82,11 @@ class UsuarioController extends Controller
 
         //Reglas de validación
         $reglas = [
-            'dpi'           =>  'unique:usuarios, cooreo,' . $usuario->id,
+            'dpi'           =>  'unique:usuarios, correo,' . $usuario->id,
             'correo'        =>  'email|unique:usuarios',
             'contrasena'    =>  'min:6|confirmed',
+            'telefono'      =>  'min:8',
+            'genero'        =>  'in:' . User::masculino . ',' . User::femenino,
             'admin'         =>  'in:' . User::usuario_administrador . ',' . User::usuario_regular,
         ];
 
@@ -121,9 +124,9 @@ class UsuarioController extends Controller
         }
 
         if($request->has('admin')){
-            if (!$usuario->esVerificado()) {//Si el usuario no está verificado no puede cambiar el valor de admin
+            if (!$usuario->esAdmin()) {//Si el usuario no es admin no puede cambiar el valor de admin
                 //El código 409 para decir que la petición es incorrecta o nó válida
-                return response()->json(['error' => 'Sólo usuarios verificados pueden cambiar el valor de administrador', 'code' => 409], 409);
+                return $this->errorResponse('Sólo usuarios verificados pueden cambiar el valor de administrador', 409);
             }
 
             $usuario->admin = $request->admin;
@@ -131,12 +134,12 @@ class UsuarioController extends Controller
 
         if (!$usuario->isDirty()) {
             //Si no cambió ningún valor respecto a los originales se envía una respuesta con código 422 de que la petición está mal formada
-            return response()->json(['error' => 'Especifique al menos un valor diferente para poder actualizar', 'code' => 422], 422);
+            return $this->errorResponse('Especifique al menos un valor diferente para poder actualizar', 422);
         }
 
         $usuario->save();
 
-        return response()->json(['data' => $usuario], 200);
+        return $this->showOne($usuario);
     }
 
     /**
@@ -150,6 +153,6 @@ class UsuarioController extends Controller
         $usuario = User::findOrFail($id);
         $usuario->delete();
 
-        return response()->json(['data' => $usuario], 200);
+        return $this->showOne($usuario);
     }
 }

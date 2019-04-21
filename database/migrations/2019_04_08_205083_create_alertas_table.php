@@ -24,9 +24,8 @@ class CreateAlertasTable extends Migration
                 Alerta::alerta_atendida,
                 Alerta::alerta_cancelada,
                 Alerta::alerta_enviada,
-                Alerta::alerta_espera,
-                Alerta::alerta_no_enviada
-            ])->default(Alerta::alerta_no_enviada);
+                Alerta::alerta_espera
+            ])->default(Alerta::alerta_enviada);
             $table->integer('usuario_id')->unsigned();
             $table->timestamps();
             $table->foreign('usuario_id')->references('id')->on('usuarios');

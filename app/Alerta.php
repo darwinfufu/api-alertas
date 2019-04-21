@@ -15,7 +15,6 @@ class Alerta extends Model
     const alerta_atendida = 'atendida';
     const alerta_cancelada = 'cancelada';
     const alerta_enviada = 'enviada';
-    const alerta_no_enviada = 'no enviada';
     const alerta_espera = 'en espera';
     
     protected $fillable = [
