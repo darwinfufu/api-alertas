@@ -46,8 +46,7 @@ class AlertaController extends ApiController
     public function update(Request $request, Alerta $alerta)
     {
         $reglas = [
-            'descripcion'       =>  'required',
-            'telefono_usuario'  =>  'min:8|required',
+            'telefono_usuario'  =>  'min:8',
             'estado'            =>  'in' . Alerta::alerta_atendida . ',' . Alerta::alerta_cancelada . ',' . Alerta::alerta_enviada . ',' . Alerta::alerta_espera
         ];
 

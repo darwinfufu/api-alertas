@@ -17,8 +17,8 @@ class CreateAlertasTable extends Migration
         Schema::create('alertas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion',150)->nullable();
-            $table->string('latitud');
-            $table->string('longitud');
+            $table->string('latitud')->nullable();
+            $table->string('longitud')->nullable();
             $table->string('telefono_usuario', 15);
             $table->enum('estado',[
                 Alerta::alerta_atendida,
