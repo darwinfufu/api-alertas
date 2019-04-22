@@ -26,9 +26,8 @@ class PersonaController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Persona $persona)
     {
-        $persona = Persona::where('sub_estacion_id', null)->findOrFail($id);
         return $this->showOne($persona);
     }
 }

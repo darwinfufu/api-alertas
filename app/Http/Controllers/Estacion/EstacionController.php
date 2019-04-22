@@ -50,10 +50,9 @@ class EstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Estacion $estacione)
     {
-        $estacion = Estacion::findOrFail($id);
-        return $this->showOne($estacion);
+        return $this->showOne($estacione);
     }
 
 
@@ -64,49 +63,39 @@ class EstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Estacion $estacione)
     {
-        $estacion = Estacion::findOrFail($id);
-
-        $reglas = [
-            'ubicacion'     =>      'required',
-            'telefono'      =>      'required',
-            'comisaria_id'  =>      'required'
-        ];
-
-        $this->validate($request, $reglas);
-
         if($request->has('num_estacion')){
-            $estacion->num_estacion = $request->num_estacion;
+            $estacione->num_estacion = $request->num_estacion;
         }
 
         if($request->has('ubicacion')){
-            $estacion->ubicacion = $request->ubicacion;
+            $estacione->ubicacion = $request->ubicacion;
         }
 
         if($request->has('telefono')){
-            $estacion->telefono = $request->telefono;   
+            $estacione->telefono = $request->telefono;   
         }
 
         if($request->has('latitud')){
-            $estacion->latitud = $request->latitud;
+            $estacione->latitud = $request->latitud;
         }
 
         if($request->has('longitud')){
-            $estacion->longitud = $request->longitud;   
+            $estacione->longitud = $request->longitud;   
         }
 
         if($request->has('comisaria_id')){
-            $estacion->comisaria_id = $request->comisaria_id;   
+            $estacione->comisaria_id = $request->comisaria_id;   
         }
 
-        if (!$estacion->isDirty()) {
+        if (!$estacione->isDirty()) {
             return $this->errorResponse('Especifique al menos un valor diferente para poder actualizar', 422);
         }
 
-        $estacion->save();
+        $estacione->save();
 
-        return $this->showOne($estacion);
+        return $this->showOne($estacione);
     }
 
     /**
@@ -115,11 +104,10 @@ class EstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estacion $estacione)
     {
-        $estacion = Estacion::findOrFail($id);
-        $estacion->delete();
+        $estacione->delete();
 
-        return $this->showOne($estacion);
+        return $this->showOne($estacione);
     }
 }

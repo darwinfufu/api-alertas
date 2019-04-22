@@ -28,10 +28,8 @@ class PoliciaController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Policia $policia)
     {
-        $policia = Policia::has('subestacion')->findOrFail($id);
-
         return $this->showOne($policia);
     }
 

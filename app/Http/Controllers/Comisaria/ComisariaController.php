@@ -30,8 +30,9 @@ class ComisariaController extends ApiController
     {
         //Reglas de validación
         $reglas = [
-            'ubicacion'     =>      'required',
-            'telefono'      =>      'required'
+            'num_comisaria' =>  'required',
+            'ubicacion'     =>  'required',
+            'telefono'      =>  'required'
         ];
 
         $this->validate($request, $reglas);
@@ -52,9 +53,8 @@ class ComisariaController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comisaria $comisaria)
     {
-        $comisaria = Comisaria::findOrFail($id);
         return $this->showOne($comisaria);
     }
 
@@ -66,16 +66,8 @@ class ComisariaController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comisaria $comisaria)
     {
-        $comisaria = Comisaria::findOrFail($id);
-
-        $reglas = [
-            'telefono'      =>      'required'
-        ];
-
-        $this->validate($request, $reglas);
-
         if($request->has('num_comisaria')){
             $comisaria->num_comisaria = $request->num_comisaria;
         }
@@ -111,9 +103,8 @@ class ComisariaController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comisaria $comisaria)
     {
-        $comisaria = Comisaria::findOrFail($id);
         $comisaria->delete();
 
         return $this->showOne($comisaria);

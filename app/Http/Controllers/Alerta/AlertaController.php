@@ -9,11 +9,7 @@ use App\Http\Controllers\ApiController;
 
 class AlertaController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $alertas = Alerta::all();
@@ -21,12 +17,6 @@ class AlertaController extends ApiController
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //Reglas de validación
@@ -47,29 +37,14 @@ class AlertaController extends ApiController
         return $this->showOne($alerta, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Alerta $alerta)
     {
-        $alerta = Alerta::findOrFail($id);
         return $this->showOne($alerta);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Alerta $alerta)
     {
-        $alerta = Alerta::findOrFail($id);
-
         $reglas = [
             'descripcion'       =>  'required',
             'telefono_usuario'  =>  'min:8|required',
@@ -119,15 +94,8 @@ class AlertaController extends ApiController
         return $this->showOne($alerta);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Alerta $alerta)
     {
-        $alerta = Alerta::findOrFail($id);
         $alerta->delete();
 
         return $this->showOne($alerta);

@@ -4,9 +4,14 @@ namespace App;
 
 use App\Alerta;
 use App\SubEstacion;
+use App\Scopes\PoliciaScope;
 
 class Policia extends User
 {
+    protected static function boot(){
+        parent::boot();
+        static::addGlobalScope(new PoliciaScope);
+    }
 
     /**
      * Policia puede enviar muchas Alertas.

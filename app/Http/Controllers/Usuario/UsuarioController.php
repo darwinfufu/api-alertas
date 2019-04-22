@@ -62,11 +62,16 @@ class UsuarioController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $usuario)
     {
-        $usuario = User::findOrFail($id);
         return $this->showOne($usuario);
     }
+
+    /*public function alertPerUser(User $usuario)
+    {
+        $alertas = $usuario->alertas;
+        return $this->showAll($alertas);
+    }*/
 
 
     /**
@@ -76,9 +81,8 @@ class UsuarioController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        $usuario = User::findOrFail($id);
 
         //Reglas de validación
         $reglas = [
@@ -123,10 +127,14 @@ class UsuarioController extends ApiController
             $usuario->contrasena = bcrypt($request->contrasena);   
         }
 
+        if($request->has('sub_estacion_id')){
+            $usuario->sub_estacion_id = $request->sub_estacion_id;
+        }
+
         if($request->has('admin')){
             if (!$usuario->esAdmin()) {//Si el usuario no es admin no puede cambiar el valor de admin
                 //El código 409 para decir que la petición es incorrecta o nó válida
-                return $this->errorResponse('Sólo usuarios verificados pueden cambiar el valor de administrador', 409);
+                return $this->errorResponse('Sólo usuarios administradores pueden cambiar el valor de admin', 409);
             }
 
             $usuario->admin = $request->admin;
@@ -148,9 +156,8 @@ class UsuarioController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        $usuario = User::findOrFail($id);
         $usuario->delete();
 
         return $this->showOne($usuario);

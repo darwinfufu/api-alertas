@@ -18,8 +18,8 @@ class CreateComisariasTable extends Migration
             $table->string('num_comisaria',45);
             $table->string('ubicacion', 255);
             $table->string('telefono',15);
-            $table->string('latitud');
-            $table->string('longitud');
+            $table->string('latitud')->nullable();
+            $table->string('longitud')->nullable();
             $table->timestamps();
         });
     }

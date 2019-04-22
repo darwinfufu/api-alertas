@@ -30,9 +30,10 @@ class SubEstacionController extends ApiController
     {
         //Reglas de validación
         $reglas = [
-            'ubicacion'     =>      'required',
-            'telefono'      =>      'required',
-            'estacion_id'   =>      'required'
+            'num_subestacion'   =>  'required',
+            'ubicacion'         =>  'required',
+            'telefono'          =>  'required',
+            'estacion_id'       =>  'required'
         ];
 
         $this->validate($request, $reglas);
@@ -50,10 +51,9 @@ class SubEstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SubEstacion $subestacione)
     {
-        $subestacion = SubEstacion::findOrFail($id);
-        return $this->showOne($subestacion);
+        return $this->showOne($subestacione);
     }
 
     /**
@@ -63,49 +63,39 @@ class SubEstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SubEstacion $subestacione)
     {
-        $subestacion = SubEstacion::findOrFail($id);
-
-        $reglas = [
-            'ubicacion'     =>      'required',
-            'telefono'      =>      'required',
-            'estacion_id'   =>      'required'
-        ];
-
-        $this->validate($request, $reglas);
-
         if($request->has('num_subestacion')){
-            $subestacion->num_subestacion = $request->num_subestacion;
+            $subestacione->num_subestacion = $request->num_subestacion;
         }
 
         if($request->has('ubicacion')){
-            $subestacion->ubicacion = $request->ubicacion;
+            $subestacione->ubicacion = $request->ubicacion;
         }
 
         if($request->has('telefono')){
-            $subestacion->telefono = $request->telefono;   
+            $subestacione->telefono = $request->telefono;   
         }
 
         if($request->has('latitud')){
-            $subestacion->latitud = $request->latitud;
+            $subestacione->latitud = $request->latitud;
         }
 
         if($request->has('longitud')){
-            $subestacion->longitud = $request->longitud;   
+            $subestacione->longitud = $request->longitud;   
         }
 
         if($request->has('estacion_id')){
-            $subestacion->estacion_id = $request->estacion_id;   
+            $subestacione->estacion_id = $request->estacion_id;   
         }
 
-        if (!$subestacion->isDirty()) {
+        if (!$subestacione->isDirty()) {
             return $this->errorResponse('Especifique al menos un valor diferente para poder actualizar', 422);
         }
 
-        $subestacion->save();
+        $subestacione->save();
 
-        return $this->showOne($subestacion);
+        return $this->showOne($subestacione);
     }
 
     /**
@@ -114,11 +104,10 @@ class SubEstacionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubEstacion $subestacione)
     {
-        $subestacion = SubEstacion::findOrFail($id);
-        $subestacion->delete();
+        $subestacione->delete();
 
-        return $this->showOne($subestacion);
+        return $this->showOne($subestacione);
     }
 }
