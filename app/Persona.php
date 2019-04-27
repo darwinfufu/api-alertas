@@ -13,15 +13,4 @@ class Persona extends User
         static::addGlobalScope(new PersonaScope);
     }
 
-    /**
-     * Una Persona tiene muchas Alertas.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function alertas()
-    {
-    	// hasMany(RelatedModel, foreignKeyOnRelatedModel = usuario_id, localKey = id)
-    	return $this->hasMany(Alerta::class, 'usuario_id');
-    }
-
 }

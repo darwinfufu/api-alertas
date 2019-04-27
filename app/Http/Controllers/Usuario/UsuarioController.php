@@ -8,24 +8,12 @@ use App\Http\Controllers\ApiController;
 
 class UsuarioController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $usuarios = User::all();
         return $this->showAll($usuarios);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //Reglas de validación
@@ -42,7 +30,6 @@ class UsuarioController extends ApiController
 
         //Campos que vienen en la petición
         $campos = $request->all();
-
         $campos['contrasena'] = bcrypt($request->contrasena);
         $campos['verificado'] = User::usuario_no_verificado;
         $campos['token_verificacion'] = User::generarTokenVerificacion();
@@ -56,31 +43,11 @@ class UsuarioController extends ApiController
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $usuario)
     {
         return $this->showOne($usuario);
     }
 
-    /*public function alertPerUser(User $usuario)
-    {
-        $alertas = $usuario->alertas;
-        return $this->showAll($alertas);
-    }*/
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $usuario)
     {
 
@@ -150,12 +117,6 @@ class UsuarioController extends ApiController
         return $this->showOne($usuario);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $usuario)
     {
         $usuario->delete();

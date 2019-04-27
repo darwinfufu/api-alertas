@@ -15,7 +15,7 @@ class PersonaController extends ApiController
      */
     public function index()
     {
-		$personas = Persona::where('sub_estacion_id', null)->get();
+		$personas = Persona::all();
         return $this->showAll($personas);
     }
 

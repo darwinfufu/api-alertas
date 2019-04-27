@@ -38,3 +38,8 @@ Route::resource('subestaciones','SubEstacion\SubEstacionController', ['except' =
 	Usuarios 
 */
 Route::resource('usuarios','Usuario\UsuarioController', ['except' => ['create', 'edit']]);
+
+/*
+	Alertas de un usuario específico - Operación compleja
+*/
+Route::resource('usuarios.alertas','Usuario\AlertaUsuarioController', ['only' => ['index']]);	

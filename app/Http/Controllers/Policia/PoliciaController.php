@@ -15,8 +15,7 @@ class PoliciaController extends ApiController
      */
     public function index()
     {
-        $policias = Policia::has('subestacion')->get();
-
+        $policias = Policia::all();
         return $this->showAll($policias);
     }
 

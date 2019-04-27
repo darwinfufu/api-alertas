@@ -22,15 +22,15 @@ class AlertaController extends ApiController
         //Reglas de validación
         $reglas = [
             'descripcion'       =>  'required',
-            'telefono_usuario'  =>  'min:8|required',
             'usuario_id'        =>  'required'
         ];
 
         $this->validate($request, $reglas);
-
+        $usuario = User::findOrFail($request->usuario_id);
         $campos = $request->all();
         //Por defecto si la alerta llega a la base de datos se toma como enviada
         $campos['estado'] = Alerta::alerta_enviada;
+        $campos['telefono_usuario'] = $usuario->telefono;
         
         $alerta = Alerta::create($campos);
 
@@ -47,7 +47,7 @@ class AlertaController extends ApiController
     {
         $reglas = [
             'telefono_usuario'  =>  'min:8',
-            'estado'            =>  'in' . Alerta::alerta_atendida . ',' . Alerta::alerta_cancelada . ',' . Alerta::alerta_enviada . ',' . Alerta::alerta_espera
+            'estado'            =>  'in:' . Alerta::alerta_atendida . ',' . Alerta::alerta_cancelada . ',' . Alerta::alerta_enviada . ',' . Alerta::alerta_espera
         ];
 
         $this->validate($request, $reglas);
@@ -69,12 +69,12 @@ class AlertaController extends ApiController
         }
 
         if($request->has('estado')){
-            $usuario = User::findOrFail(auth()->user()->id);
+            // $usuario = User::findOrFail(auth()->user()->id);
 
-            if (!$usuario->esAdmin()) {//Si el usuario autenticado no es admin
-                //El código 409 para decir que la petición es incorrecta o nó válida
-                return $this->errorResponse('Sólo los administradores pueden cambiar el estado de una alerta', 409);
-            }
+            // if (!$usuario->esAdmin()) {//Si el usuario autenticado no es admin
+            //     //El código 409 para decir que la petición es incorrecta o nó válida
+            //     return $this->errorResponse('Sólo los administradores pueden cambiar el estado de una alerta', 409);
+            // }
 
             $alerta->estado = $request->estado;
         }

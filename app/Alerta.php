@@ -28,31 +28,19 @@ class Alerta extends Model
 
 
     /*
-        Las Alertas las puede enviar tanto un persona regular como un policía para pedir apoyo
+        Las Alertas las puede enviar tanto un persona regular como un policía para pedir apoyo por eso 
+        la relación va directamente con usuario
     */
 
-
-
     /**
-     * Alerta puede pertenecer a una Persona regular.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function persona()
+    * Una Alerta pertenece únicamente a un usuario
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function usuario()
     {
-        // belongsTo(RelatedModel, foreignKey = persona_id, keyOnRelatedModel = id)
-        return $this->belongsTo(Persona::class);
-    }
-
-    /**
-     * Alerta puede pertenecer a un Policia.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function policia()
-    {
-        // belongsTo(RelatedModel, foreignKey = policia_id, keyOnRelatedModel = id)
-        return $this->belongsTo(Policia::class);
+        // belongsTo(RelatedModel, foreignKey = usuario_id, keyOnRelatedModel = id)
+        return $this->belongsTo(Usuario::class);
     }
 
 }

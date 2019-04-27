@@ -23,7 +23,7 @@ trait ApiResponser
 		return $this->successResponse(['data' => $collection], $code);
 	}
 
-	//Muestra una sola instance de un modelo en específico
+	//Muestra una sola instancia de un modelo en específico
 	protected function showOne(Model $instance, $code = 200){
 		return $this->successResponse(['data' => $instance], $code);
 	}

@@ -14,17 +14,6 @@ class Policia extends User
     }
 
     /**
-     * Policia puede enviar muchas Alertas.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function alertas()
-    {
-    	// hasMany(RelatedModel, foreignKeyOnRelatedModel = policia_id, localKey = id)
-    	return $this->hasMany(Alerta::class, 'usuario_id');
-    }
-
-    /**
      * Policia pertenece a una sola SubEstación.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

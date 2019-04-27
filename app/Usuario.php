@@ -21,8 +21,8 @@ class User extends Authenticatable
     const usuario_regular = 'false';
 
     //Constantes para saber el género del usuario
-    const masculino = 'Masculino';
-    const femenino = 'Femenino';
+    const masculino = 'masculino';
+    const femenino = 'femenino';
 
     /**
      * The attributes that are mass assignable.
@@ -55,31 +55,31 @@ class User extends Authenticatable
     ];
 
     //Mutadores y Accesores para el nombre y apellido del usuario y para el género
-    public function setAtrNombre($valor){
+    public function setNombreAttribute($valor){
         $this->attributes['nombre'] = strtolower($valor);
     }
 
-    public function getAtrNombre($valor){
+    public function getNombreAttribute($valor){
         return ucwords($valor);
     }
 
-    public function setAtrApellido($valor){
+    public function setApellidoAttribute($valor){
         $this->attributes['apellido'] = strtolower($valor);
     }
 
-    public function getAtrApellido($valor){
+    public function getApellidoAttribute($valor){
         return ucwords($valor);
     }
 
-    public function setAtrGenero($valor){
+    public function setGeneroAttribute($valor){
         $this->attributes['genero'] = strtolower($valor);
     }
 
-    public function getAtrGenero($valor){
+    public function getGeneroAttribute($valor){
         return ucfirst($valor);
     }
 
-    public function setAtrCorreo($valor){
+    public function setCorreoAttribute($valor){
         $this->attributes['correo'] = strtolower($valor);
     }
 
@@ -94,5 +94,16 @@ class User extends Authenticatable
     public static function generarTokenVerificacion(){
         //Genera un token con cadena de 40 caracteres
         return str_random(40);
+    }
+
+    /**
+     * Un Usuario puede tener muchas alertas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alertas()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = usuario_id, localKey = id)
+        return $this->hasMany(Alerta::class, 'usuario_id');
     }
 }
