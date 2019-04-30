@@ -25,11 +25,11 @@ class CreateUsuariosTable extends Migration
             ]);
             $table->string('telefono', 15);
             $table->string('correo')->unique();
-            $table->string('contrasena');
+            $table->string('contrasena',100);
             $table->integer('sub_estacion_id')->unsigned()->nullable();
-            $table->string('verificado')->default(User::usuario_no_verificado);
-            $table->string('token_verificacion')->nullable();
-            $table->string('admin')->default(User::usuario_regular);
+            $table->string('verificado', 10)->default(User::usuario_no_verificado);
+            $table->string('token_verificacion', 50)->nullable();
+            $table->string('admin', 10)->default(User::usuario_regular);
             $table->rememberToken();
             $table->timestamps();
 
