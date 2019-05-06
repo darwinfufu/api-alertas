@@ -39,7 +39,12 @@ Route::resource('subestaciones','SubEstacion\SubEstacionController', ['except' =
 */
 Route::resource('usuarios','Usuario\UsuarioController', ['except' => ['create', 'edit']]);
 
+//Ruta para verificar usuarios
+Route::name('verificar')->get('usuarios/verificar/{token}', 'Usuario\UsuarioController@verificar');
+//Ruta para reenviar el correo de verificación
+Route::name('reenviar')->get('usuarios/{usuario}/reenviar', 'Usuario\UsuarioController@reenviar');
+
 /*
 	Alertas de un usuario específico - Operación compleja
 */
-Route::resource('usuarios.alertas','Usuario\AlertaUsuarioController', ['only' => ['index']]);	
+Route::resource('usuarios.alertas','Usuario\AlertaUsuarioController', ['only' => ['index']]);

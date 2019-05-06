@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Persona;
 use App\Policia;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +41,7 @@ class Alerta extends Model
     public function usuario()
     {
         // belongsTo(RelatedModel, foreignKey = usuario_id, keyOnRelatedModel = id)
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
     }
 
 }

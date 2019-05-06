@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -51,7 +52,7 @@ class User extends Authenticatable
     protected $hidden = [
         'contrasena', 
         'remember_token',
-        'token_verificacion',
+        //'token_verificacion',
     ];
 
     //Mutadores y Accesores para el nombre y apellido del usuario y para el género
