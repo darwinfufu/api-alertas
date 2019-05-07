@@ -17,8 +17,6 @@ class EstacionesSeeder extends Seeder
             'num_estacion'		=>  '42-1',
             'ubicacion'			=>  'Cantón Santa Izabel, Zona 3 Local 1, 3er Nivel San Marcos, San Marcos',
             'telefono'			=>	'40216303',
-            'latitud'			=>	'14.969145',
-            'longitud'			=>	'-91.792411',
             'comisaria_id'		=>	1
         ]);
 
@@ -27,8 +25,6 @@ class EstacionesSeeder extends Seeder
             'num_estacion'		=>  '41-1',
             'ubicacion'			=>  'Final de la Zona 6, Cantón Choqui, Quetzaltenango',
             'telefono'			=>	'40216303',
-            'latitud'			=>	'14.870603',
-            'longitud'			=>	'-91.492891',
             'comisaria_id'		=>	2
         ]);  
     }
