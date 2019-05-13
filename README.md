@@ -14,11 +14,11 @@ _Diferentes herramientas y lenguajes._
 
 ## Autores ✒️
 
-_Integrantes de la carrera de Ingeniería en Sistemas Universidad Mariano Gálvez de Guatemala._
+_Integrantes de la carrera de Ingeniería en Sistemas Universidad Mariano Gálvez de Guatemala, extensión San Pedro Sacatepéquez, San Marcos._
 
-* **Darwin Fuentes**
-* **Cristian**
-* **Billy**
+* **Darwin Alexis Fuentes Fuentes**
+* **Cristiand Estuardo Orozco Velásquez**
+* **Billy Ezer Velásquez Pérez**
 
 ## Licencia 📄
 
