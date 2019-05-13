@@ -1,22 +1,11 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Confirmar Correo!</title>
-</head>
-<body>
-    <h3>Buen día! {{$usuario->nombre.' '.$usuario->apellido}}</h3>
-    <p>Gracias por crear tu cuenta en Alertas UMG y contribuir a la reducción de los robos y permitirnos actuar de forma más rápida y apropiada.</p>
+@component('mail::message')
+# Confirma tu Cuenta!
+Buen día! {{$usuario->nombre.' '.$usuario->apellido}}. <br/> <br/>
+Gracias por crear tu cuenta en Alertas UMG y contribuir a la reducción de los robos y permitirnos actuar de forma más rápida y apropiada.
+<br/> <br/>
+Por favor verifica tu cuenta, presiona el botón:
+@component('mail::button', ['url' => route('verificar', $usuario->token_verificacion)])
+Verificar
+@endcomponent
 
-    <p>Por favor verifica tu cuenta ingresando al siguiente enlace:</p>
-   
-    <ul>
-        <li>
-            <a href="{{ route('verificar', $usuario->token_verificacion) }}">
-                Confirmar
-            </a>
-        </li>
-    </ul>
-</body>
-</html>
+@endcomponent

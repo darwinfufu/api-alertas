@@ -1,29 +1,32 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Alerta!</title>
-</head>
-<body>
-    <p>Atención! Se recibió una nueva alerta con fecha y hora: {{ $alerta->created_at }}.</p>
-    <h3>Datos del usuario que realizó la alerta:</h3>
-    <ul>
-        <li>Nombre: {{ $alerta->usuario->nombre.' '.$alerta->usuario->apellido}}</li>
-        <li>Teléfono: {{ $alerta->telefono_usuario }}</li>
-        <li>DPI: {{ $alerta->usuario->dpi }}</li>
-        <li>Email: {{ $alerta->usuario->correo }}</li>
-    </ul>
-    <h3>Datos del reporte:</h3>
-    <ul>
-        <li>Descripción: {{ $alerta->descripcion }}</li>
-        <li>Latitud: {{ $alerta->latitud }}</li>
-        <li>Longitud: {{ $alerta->longitud }}</li>
-        <li>
-            <a href="https://www.google.com/maps/dir/{{ $alerta->latitud }},{{ $alerta->longitud }}">
-                Ver en Google Maps
-            </a>
-        </li>
-    </ul>
-</body>
-</html>
+@component('mail::message')
+# ALERTA NUEVA!
+Atención! Se recibió una nueva alerta con fecha y hora: {{ $alerta->created_at }}. <br/> <br/>
+<strong>Datos de la alerta:</strong> <br/>
+@if(is_null($alerta->usuario->sub_estacion_id))
+    @if($alerta->usuario->admin == "true")
+    <strong>Tipo:</strong> Usuario Administrador.
+    @else
+    <strong>Tipo:</strong> Usuario Regular.
+    @endif
+@elseif(!is_null($alerta->usuario->sub_estacion_id))
+    @if($alerta->usuario->admin == "true")
+    <strong>Tipo:</strong> Agente de la Policía y Usuario Administrador.
+    @else
+    <strong>Tipo:</strong> Agente de la Policía.
+    @endif
+@endif
+<br/>
+<strong>Nombre:</strong> {{ $alerta->usuario->nombre.' '.$alerta->usuario->apellido}}. <br/>
+<strong>Teléfono:</strong> {{ $alerta->telefono_usuario }} <br/>
+<strong>DPI:</strong> {{ $alerta->usuario->dpi }} <br/>
+<strong>Email:</strong> {{ $alerta->usuario->correo }} <br/>
+<br/> <br/>
+<strong>Descripción:</strong> {{ $alerta->descripcion }}. <br/>
+<strong>Latitud:</strong> {{ $alerta->latitud }} <br/>
+<strong>Longitud:</strong> {{ $alerta->longitud }} <br/>
+
+@component('mail::button', ['url' => 'https://www.google.com/maps/dir/'.$alerta->latitud.','. $alerta->longitud])
+Ver En Google Maps
+@endcomponent
+
+@endcomponent
