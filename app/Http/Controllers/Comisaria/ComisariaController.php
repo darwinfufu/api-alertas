@@ -80,14 +80,6 @@ class ComisariaController extends ApiController
             $comisaria->telefono = $request->telefono;   
         }
 
-        if($request->has('latitud')){
-            $comisaria->latitud = $request->latitud;
-        }
-
-        if($request->has('longitud')){
-            $comisaria->longitud = $request->longitud;   
-        }
-
         if (!$comisaria->isDirty()) {
             return $this->errorResponse('Especifique al menos un valor diferente para poder actualizar', 422);
         }

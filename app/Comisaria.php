@@ -14,8 +14,6 @@ class Comisaria extends Model
         'num_comisaria', 
         'ubicacion',
         'telefono',
-        'latitud',
-        'longitud',
     ];
 
     /**

@@ -77,14 +77,6 @@ class EstacionController extends ApiController
             $estacione->telefono = $request->telefono;   
         }
 
-        if($request->has('latitud')){
-            $estacione->latitud = $request->latitud;
-        }
-
-        if($request->has('longitud')){
-            $estacione->longitud = $request->longitud;   
-        }
-
         if($request->has('comisaria_id')){
             $estacione->comisaria_id = $request->comisaria_id;   
         }

@@ -15,8 +15,6 @@ class Estacion extends Model
         'num_estacion', 
         'ubicacion',
         'telefono', 
-        'latitud',
-        'longitud',
         'comisaria_id',
     ];
 
